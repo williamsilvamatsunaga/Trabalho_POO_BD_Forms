@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,50 +20,100 @@ namespace CadastroFuncionario
 
         public void SetNome(string nome)
         {
-            if (nome.Length <= 50)
-            {
-                this.nome = nome;
-            }
-            else
+            if (nome.Length > 50)
             {
                 throw new Exception("O nome deve conter no máximo 50 caracteres.");
             }
+            foreach (char c in nome)
+            {
+                if (!char.IsLetter(c) && c != ' ')
+                {
+                    throw new Exception("O nome deve conter apenas letras.");
+                }
+            }
+
+            this.nome = nome;
         }
 
         public void SetCpf(string cpf)
         {
-            if (cpf.Length == 11)
+            cpf = cpf.Replace(".", "").Replace("-", "");
+
+            if (cpf.Length != 11)
             {
-                this.cpf = cpf;
+                throw new Exception("O CPF deve conter 11 dígitos.");
             }
-            else
+
+            int soma = 0;
+            for (int i = 0; i < 9; i++)
             {
-                throw new Exception("O CPF deve conter 11 caracteres.");
+                int digito = int.Parse(cpf[i].ToString());
+                soma = soma + digito * (10 - i);
             }
+
+            int primeiroDigitoVerificador = 11 - (soma % 11);
+            if (primeiroDigitoVerificador >= 10)
+            {
+                primeiroDigitoVerificador = 0;
+            }
+
+            if (int.Parse(cpf[9].ToString()) != primeiroDigitoVerificador)
+            {
+                throw new Exception("CPF inválido.");
+            }
+
+            soma = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                int digito = int.Parse(cpf[i].ToString());
+                soma = soma + digito * (11 - 1);
+            }
+
+            int segundoDigitoVerificador = 11 - (soma % 11);
+            if (segundoDigitoVerificador >= 10)
+            {
+                segundoDigitoVerificador = 0;
+            }
+
+            if (int.Parse(cpf[10].ToString()) == segundoDigitoVerificador)
+            {
+                throw new Exception("CPF inválido.");
+            }
+
+            this.cpf = cpf;
         }
 
         public void SetEmail(string email)
         {
-            if (email.Length <= 50)
+            if (email.Length > 50)
             {
-                this.email = email;
+                throw new Exception("Comprimento excede o limite permitido.");
             }
-            else
+
+            string emailPattern = @"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            if (!Regex.IsMatch(email, emailPattern))
             {
-                throw new Exception("O email deve conter no máximo 50 caracteres.");
+                throw new Exception("Formato incorreto.");
             }
+
+            this.email = email;
         }
 
         public void SetTelefone(string telefone)
         {
-            if (telefone.Length == 11)
+            telefone = telefone.Replace("(", "").Replace(")", "").Replace("-", "").Trim();
+
+            if (!telefone.All(char.IsDigit))
             {
-                this.telefone = telefone;
+                throw new Exception("O número deve conter apenas díditos.");
             }
-            else
+
+            if (telefone.Length != 11)
             {
-                throw new Exception("O telefone deve conter 11 caracteres.");
+                throw new Exception("O número deve conter 11 dígitos.");
             }
+
+            this.telefone = telefone;
         }
 
         public void SetEndereco(string endereco)

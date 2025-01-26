@@ -51,6 +51,12 @@ namespace CadastroFuncionario
                     else
                     {
                         MessageBox.Show("Erro ao cadastrar funcionário.");
+                        txtNome.Clear();
+                        txtCpf.Clear();
+                        txtEmail.Clear();
+                        txtTelefone.Clear();
+                        txtEndereco.Clear();
+                        txtNome.Focus();
                     }
                 }
                 else
@@ -67,6 +73,12 @@ namespace CadastroFuncionario
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao cadastrar funcionário: " + ex.Message);
+                txtNome.Clear();
+                txtCpf.Clear();
+                txtEmail.Clear();
+                txtTelefone.Clear();
+                txtEndereco.Clear();
+                txtNome.Focus();
             }
         }
     }
