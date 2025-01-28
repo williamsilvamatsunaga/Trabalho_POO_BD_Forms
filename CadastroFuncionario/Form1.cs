@@ -87,5 +87,62 @@ namespace CadastroFuncionario
             FormListar form = new FormListar();
             form.ShowDialog();
         }
+
+        private void brAtualizar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!txtNome.Text.Equals("") && !txtCpf.Text.Equals("")
+                    && !txtEmail.Text.Equals("") && !txtTelefone.Text.Equals("")
+                    && !txtEndereco.Text.Equals(""))
+                {
+                    Funcionario c = new Funcionario();
+                    string nome = txtNome.Text;
+                    c.SetNome(nome);
+                    string cpf = txtCpf.Text;
+                    c.SetCpf(cpf);
+                    string email = txtEmail.Text;
+                    c.SetEmail(email);
+                    string telefone = txtTelefone.Text;
+                    c.SetTelefone(telefone);
+                    string endereco = txtEndereco.Text;
+                    c.SetEndereco(endereco);
+
+                    if (c.AtualizarFuncionario())
+                    {
+                        MessageBox.Show("Funcionário atualizado com sucesso.");
+                        txtNome.Clear();
+                        txtEmail.Clear();
+                        txtTelefone.Clear();
+                        txtEndereco.Clear();
+                        txtCpf.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Não foi possível atualizar dados.");
+                        txtNome.Clear();
+                        txtEmail.Clear();
+                        txtTelefone.Clear();
+                        txtEndereco.Clear();
+                        txtCpf.Focus();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Adicione no campo CPF o funcionário que deseja atualizar e posteriormente insira os dados atualizados.");
+                    
+                    txtNome.Clear();
+                    txtEmail.Clear();
+                    txtTelefone.Clear();
+                    txtEndereco.Clear();
+                    txtCpf.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Erro ao atualizar dados do funcionário. " + ex.Message);
+            }
+        }
     }
 }

@@ -185,6 +185,7 @@
             this.brAtualizar.TabIndex = 14;
             this.brAtualizar.Text = "Atualizar";
             this.brAtualizar.UseVisualStyleBackColor = false;
+            this.brAtualizar.Click += new System.EventHandler(this.brAtualizar_Click);
             // 
             // Form1
             // 

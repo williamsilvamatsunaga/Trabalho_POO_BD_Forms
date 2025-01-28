@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -151,9 +152,9 @@ namespace CadastroFuncionario
                 return false;
             }
         }
-    
 
-    public DataTable ListarDados()
+
+        public DataTable ListarDados()
         {
             DataTable dt = new DataTable();
 
@@ -169,16 +170,39 @@ namespace CadastroFuncionario
 
                 da.Fill(dt);
 
-                
-                
+
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao conectar com o banco de dados: " + ex.Message);
-                
+
             }
 
             return dt;
+        }
+
+        public bool AtualizarFuncionario()
+        {
+            try
+            {
+                MySqlConnection MysqlConexaoBanco = new MySqlConnection(ConexaoBanco.bancoServidor);
+                MysqlConexaoBanco.Open();
+
+                string update = $"UPDATE Funcionarios SET nome = '{nome}', email = '{email}', telefone = '{telefone}', endereco = '{endereco}' WHERE cpf = '{cpf}'";
+
+                MySqlCommand comandoSql = MysqlConexaoBanco.CreateCommand();
+                comandoSql.CommandText = update;
+
+                comandoSql.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Erro ao conectar com o banco de dados" + ex.Message);
+                return false;
+            }
         }
     }
 }
