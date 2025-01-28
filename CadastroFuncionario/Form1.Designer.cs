@@ -162,6 +162,7 @@
             this.btListar.TabIndex = 12;
             this.btListar.Text = "Listar";
             this.btListar.UseVisualStyleBackColor = false;
+            this.btListar.Click += new System.EventHandler(this.btListar_Click);
             // 
             // btExcluir
             // 

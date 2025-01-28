@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -149,6 +150,35 @@ namespace CadastroFuncionario
                 MessageBox.Show("Erro ao conectar com o banco de dados: " + ex.Message);
                 return false;
             }
+        }
+    
+
+    public DataTable ListarDados()
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                MySqlConnection MysqlConexaoBanco = new MySqlConnection(ConexaoBanco.bancoServidor);
+                MysqlConexaoBanco.Open();
+
+                string select = "SELECT * FROM Funcionarios";
+
+                MySqlCommand comandoSql = new MySqlCommand(select, MysqlConexaoBanco);
+                MySqlDataAdapter da = new MySqlDataAdapter(comandoSql);
+
+                da.Fill(dt);
+
+                
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao conectar com o banco de dados: " + ex.Message);
+                
+            }
+
+            return dt;
         }
     }
 }

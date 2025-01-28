@@ -81,5 +81,11 @@ namespace CadastroFuncionario
                 txtNome.Focus();
             }
         }
+
+        private void btListar_Click(object sender, EventArgs e)
+        {
+            FormListar form = new FormListar();
+            form.ShowDialog();
+        }
     }
 }

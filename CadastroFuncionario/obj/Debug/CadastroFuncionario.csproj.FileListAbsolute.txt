@@ -41,3 +41,4 @@ D:\Usuario\Desktop\CadastroFuncionario\CadastroFuncionario\obj\Debug\CadastroFun
 D:\Usuario\Desktop\CadastroFuncionario\CadastroFuncionario\obj\Debug\Cadastro.A01BBC77.Up2Date
 D:\Usuario\Desktop\CadastroFuncionario\CadastroFuncionario\obj\Debug\CadastroFuncionario.exe
 D:\Usuario\Desktop\CadastroFuncionario\CadastroFuncionario\obj\Debug\CadastroFuncionario.pdb
+D:\Usuario\Desktop\CadastroFuncionario\CadastroFuncionario\obj\Debug\CadastroFuncionario.FormListar.resources
