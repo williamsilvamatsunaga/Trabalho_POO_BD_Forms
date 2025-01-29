@@ -204,5 +204,27 @@ namespace CadastroFuncionario
                 return false;
             }
         }
+
+        public bool DeletarFuncionario()
+        {
+            try
+            {
+                MySqlConnection MysqlConexaoBanco = new MySqlConnection(ConexaoBanco.bancoServidor);
+                MysqlConexaoBanco.Open();
+
+                string delete = $"DELETE FROM Funcionarios WHERE cpf = '{cpf}'";
+
+                MySqlCommand comandoSql = MysqlConexaoBanco.CreateCommand();
+                comandoSql.CommandText = delete;
+
+                comandoSql.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao conectar com o banco de dados" + ex.Message);
+                return false;
+            }
+        }
     }
 }

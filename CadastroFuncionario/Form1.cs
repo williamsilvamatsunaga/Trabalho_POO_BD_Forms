@@ -144,5 +144,44 @@ namespace CadastroFuncionario
                 MessageBox.Show("Erro ao atualizar dados do funcionário. " + ex.Message);
             }
         }
+
+        private void btExcluir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!txtCpf.Text.Equals(""))
+                {
+                    Funcionario c = new Funcionario();
+                    string cpf = txtCpf.Text;
+                    c.SetCpf(cpf);
+                    if (c.DeletarFuncionario())
+                    {
+                        MessageBox.Show("Funcionário excluído com sucesso.");
+                        txtCpf.Clear();
+                        txtCpf.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Erro ao excluir funcionário.");
+                        txtCpf.Clear();
+                        txtCpf.Focus();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Busque pelo CPF o funcionário que deseja excluir.");
+                    txtNome.Clear();
+                    txtEmail.Clear();
+                    txtTelefone.Clear();
+                    txtEndereco.Clear();
+                    txtCpf.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao excluir funcionário. " + ex.Message);
+            }
+
+        }
     }
 }

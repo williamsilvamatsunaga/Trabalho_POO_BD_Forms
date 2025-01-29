@@ -174,6 +174,7 @@
             this.btExcluir.TabIndex = 13;
             this.btExcluir.Text = "Excluir";
             this.btExcluir.UseVisualStyleBackColor = false;
+            this.btExcluir.Click += new System.EventHandler(this.btExcluir_Click);
             // 
             // brAtualizar
             // 
